@@ -1,0 +1,40 @@
+name: "Setup Git"
+description: "Setup Git credentials, user name and e-mail address"
+author: "Frequenz Energy-as-a-Service GmbH"
+
+# Refer to the following link(s) for more information on inputs:
+# https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#inputs
+inputs:
+  username:
+    description: "The username to use to authenticate with Git"
+    required: true
+  password:
+    description: "The password to use to authenticate with Git"
+    required: true
+  name:
+    description: "The name to use for Git commits"
+    required: false
+    default: "GitHub Actions"
+  email:
+    description: "The e-mail address to use for Git commits"
+    required: false
+    default: "41898282+github-actions[bot]@users.noreply.github.com"
+
+# Refer to the following link(s) for more information on the composite run steps:
+# https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#runs
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Git
+      shell: bash
+      env:
+        NAME: ${{ inputs.name }}
+        EMAIL: ${{ inputs.email }}
+        USER: ${{ inputs.username }}
+        PASS: ${{ inputs.password }}
+      run: |
+        set -u
+        git config --global user.name "$NAME"
+        git config --global user.email "$EMAIL"
+        echo "https://$USER:$PASS@github.com" > ~/.git-credentials
+        git config --global credential.helper store
