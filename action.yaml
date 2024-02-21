@@ -25,16 +25,23 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Setup Git
+    - name: Setup Git user name and e-mail
       shell: bash
       env:
         NAME: ${{ inputs.name }}
         EMAIL: ${{ inputs.email }}
-        USER: ${{ inputs.username }}
-        PASS: ${{ inputs.password }}
       run: |
         set -u
         git config --global user.name "$NAME"
         git config --global user.email "$EMAIL"
+
+    - name: Setup Git credentials
+      if: ${{ inputs.username != '' || inputs.password != '' }}
+      shell: bash
+      env:
+        USER: ${{ inputs.username }}
+        PASS: ${{ inputs.password }}
+      run: |
+        set -u
         echo "https://$USER:$PASS@github.com" > ~/.git-credentials
         git config --global credential.helper store
