@@ -6,17 +6,27 @@ author: "Frequenz Energy-as-a-Service GmbH"
 # https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#inputs
 inputs:
   username:
-    description: "The username to use to authenticate with Git"
-    required: true
+    description: >
+      The username to use to authenticate with Git.
+    required: false
+    default: ""
   password:
-    description: "The password to use to authenticate with Git"
-    required: true
+    description: >
+      The password to use to authenticate with Git.
+    required: false
+    default: ""
   name:
-    description: "The name to use for Git commits"
+    description: >
+      The name to use for Git commits. This is the name that will be used to
+      identify the author of the commit. By default the "GitHub Actions" bot
+      name is used.
     required: false
     default: "GitHub Actions"
   email:
-    description: "The e-mail address to use for Git commits"
+    description: >
+      The e-mail address to use for Git commits. This is the e-mail address
+      that will be used to identify the author of the commit. By default the
+      "GitHub Actions" bot e-mail address is used.
     required: false
     default: "41898282+github-actions[bot]@users.noreply.github.com"
 
@@ -25,16 +35,23 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Setup Git
+    - name: Setup Git user name and e-mail
       shell: bash
       env:
         NAME: ${{ inputs.name }}
         EMAIL: ${{ inputs.email }}
-        USER: ${{ inputs.username }}
-        PASS: ${{ inputs.password }}
       run: |
         set -u
         git config --global user.name "$NAME"
         git config --global user.email "$EMAIL"
+
+    - name: Setup Git credentials
+      if: ${{ inputs.username != '' || inputs.password != '' }}
+      shell: bash
+      env:
+        USER: ${{ inputs.username }}
+        PASS: ${{ inputs.password }}
+      run: |
+        set -u
         echo "https://$USER:$PASS@github.com" > ~/.git-credentials
         git config --global credential.helper store
