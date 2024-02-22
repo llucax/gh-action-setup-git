@@ -32,21 +32,6 @@ bot when new commits are created. No credentials are configured by default.
 If any of `username` and `password` are provided, then Git will be configured
 to use them for authentication. Otherwise, no credentials will be configured.
 
-## Dependabot and private repositories as dependencies
-
-If you use dependabot and have private repositories as dependencies, the
-credentials configured here will have no effect on PRs created by dependabot,
-as [they don't have access to secrets][secrets-access] for [security
-reasons][pwn-requests].
-
-To fix this, you need to configure your GitHub organization to [allow
-dependabot access to the private repositories][dependabot-access] you use as
-dependencies for other projects.
-
-[secrets-access]: https://github.blog/changelog/2021-02-19-github-actions-workflows-triggered-by-dependabot-prs-will-run-with-read-only-permissions/
-[pwn-requests]: https://securitylab.github.com/research/github-actions-preventing-pwn-requests/
-[dependabot-access]: https://docs.github.com/en/organizations/keeping-your-organization-secure/managing-security-settings-for-your-organization/managing-security-and-analysis-settings-for-your-organization#allowing-dependabot-to-access-private-dependencies
-
 ## Full example
 
 ```yaml
