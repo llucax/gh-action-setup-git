@@ -44,7 +44,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Git
-        uses: frequenz-io/gh-action-setup-git@v0.x.x
+        uses: frequenz-floss/gh-action-setup-git@v0.x.x
         with:
           username: ${{ secrets.GIT_USER }}
           password: ${{ secrets.GIT_PASS }}
