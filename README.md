@@ -15,7 +15,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Git
-        uses: frequenz-floss/gh-action-setup-git@v0.x.x
+        # Replace the version with the latest version
+        uses: frequenz-floss/gh-action-setup-git@v1.0.0
 ```
 
 This will configure the user name and email to impersonate the GitHub Actions
@@ -44,7 +45,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Git
-        uses: frequenz-floss/gh-action-setup-git@v0.x.x
+        # Replace the version with the latest version
+        uses: frequenz-floss/gh-action-setup-git@v1.0.0
         with:
           username: ${{ secrets.GIT_USER }}
           password: ${{ secrets.GIT_PASS }}
