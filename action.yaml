@@ -30,7 +30,8 @@ inputs:
     required: false
     default: "41898282+github-actions[bot]@users.noreply.github.com"
 
-# Refer to the following link(s) for more information on the composite run steps:
+# Refer to the following link(s) for more information on the composite run
+# steps:
 # https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#runs
 runs:
   using: "composite"

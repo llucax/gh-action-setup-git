@@ -1,6 +1,6 @@
 # Git Setup Action
 
-This action sets up Git for use in actions by configuring the user name and
+This action sets up Git for use in actions by configuring the username and
 email, and credentials.
 
 Here is an example demonstrating how to use it in a workflow:
@@ -19,7 +19,7 @@ jobs:
         uses: frequenz-floss/gh-action-setup-git@v1.0.0
 ```
 
-This will configure the user name and email to impersonate the GitHub Actions
+This will configure the username and email to impersonate the GitHub Actions
 bot when new commits are created. No credentials are configured by default.
 
 ## Inputs
